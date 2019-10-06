@@ -1,8 +1,8 @@
-package ru.aielemental.tests;
+package ru.aielemental;
 
 import java.util.Objects;
 
-import ru.aielemental.tests.simplegraphlib.Graphs;
+import ru.aielemental.simplegraphlib.Graphs;
 
 public class Main {
 

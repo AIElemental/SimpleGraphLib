@@ -1,4 +1,4 @@
-package ru.aielemental.tests.simplegraphlib;
+package ru.aielemental.simplegraphlib;
 
 import java.util.List;
 
@@ -9,11 +9,11 @@ import org.junit.Test;
  * @author Artem Bulanov
  * Created at 2019-10-06
  */
-public class TestUndirectedGraphs {
+public class TestDirectedGraphs {
 
     @Test
     public void testSelfSearch() {
-        var graph = Graphs.getUndirectedGraph(Integer.class);
+        var graph = Graphs.getDirectedGraph(Integer.class);
         graph.addVertex(1);
         Assert.assertEquals(List.of(), graph.getPath(1, 1));
         graph.addVertex(2);
@@ -26,9 +26,11 @@ public class TestUndirectedGraphs {
 
     @Test
     public void testNotConnectedSearchDirect() {
-        var graph = Graphs.getUndirectedGraph(Integer.class);
+        var graph = Graphs.getDirectedGraph(Integer.class);
         graph.addVertex(1);
         graph.addVertex(2);
+        Assert.assertNull(graph.getPath(1, 2));
+        graph.addEdge(2, 1);
         Assert.assertNull(graph.getPath(1, 2));
         graph.addEdge(1, 2);
         Assert.assertNotNull(graph.getPath(1, 2));
@@ -36,7 +38,7 @@ public class TestUndirectedGraphs {
 
     @Test
     public void testNotConnectedSearchIndirect() {
-        var graph = Graphs.getUndirectedGraph(Integer.class);
+        var graph = Graphs.getDirectedGraph(Integer.class);
         graph.addVertex(1);
         graph.addVertex(2);
         Assert.assertNull(graph.getPath(1, 2));
@@ -48,41 +50,25 @@ public class TestUndirectedGraphs {
         graph.addEdge(2, 4);
         Assert.assertNull(graph.getPath(1, 2));
         graph.addEdge(3, 4);
+        Assert.assertNull(graph.getPath(1, 2));
+        graph.addEdge(3, 2);
         Assert.assertNotNull(graph.getPath(1, 2));
-    }
 
-    @Test
-    public void testSearchWithLoopsInBetween() {
-        var graph = Graphs.getUndirectedGraph(Integer.class);
-        graph.addVertex(1);
-        graph.addVertex(2);
-        graph.addVertex(3);
-        graph.addVertex(4);
-        graph.addEdge(1, 2);
-        graph.addEdge(2, 2);
-        graph.addEdge(2, 3);
-        graph.addEdge(3, 3);
-        graph.addEdge(3, 4);
-        Assert.assertNotNull(graph.getPath(1, 4));
     }
 
     @Test
     public void testLoopsAllowed() {
-        var graph = Graphs.getUndirectedGraph(Object.class);
+        var graph = Graphs.getDirectedGraph(Object.class);
 
         var v1 = "v1";
         Assert.assertTrue(graph.addVertex(v1));
 
-        try {
-            graph.addEdge(v1, v1);
-        } catch (IllegalArgumentException e) {
-            Assert.fail();
-        }
+        graph.addEdge(v1, v1);
     }
 
     @Test
     public void testVertexAdditionUniqueness() {
-        var graph = Graphs.getUndirectedGraph(Object.class);
+        var graph = Graphs.getDirectedGraph(Object.class);
 
         Assert.assertTrue(graph.addVertex(graph));
         Assert.assertFalse(graph.addVertex(graph));
@@ -95,47 +81,35 @@ public class TestUndirectedGraphs {
 
     @Test
     public void testNullAllowed() {
-        var graph = Graphs.getUndirectedGraph(Object.class);
+        var graph = Graphs.getDirectedGraph(Object.class);
 
         Assert.assertTrue(graph.addVertex(null));
         Assert.assertFalse(graph.addVertex(null));
 
-        try {
-            graph.addEdge(null, null);
-        } catch (IllegalArgumentException e) {
-            Assert.fail();
-        }
+        graph.addEdge(null, null);
 
-        try {
-            Assert.assertTrue(graph.addVertex("Object"));
-            graph.addEdge("Object", null);
-            graph.addEdge(null, "Object");
-        } catch (IllegalArgumentException e) {
-            Assert.fail();
-        }
+        Assert.assertTrue(graph.addVertex("Object"));
+        graph.addEdge("Object", null);
+        graph.addEdge(null, "Object");
     }
 
     @Test
     public void testDuplicateEdgesAllowed() {
-        var graph = Graphs.getUndirectedGraph(Object.class);
+        var graph = Graphs.getDirectedGraph(Object.class);
 
         var v1 = "v1";
         var v2 = new Object();
         Assert.assertTrue(graph.addVertex(v1));
         Assert.assertTrue(graph.addVertex(v2));
 
-        try {
-            graph.addEdge(v1, v2);
-            graph.addEdge(v1, v2);
-            graph.addEdge(v1, v2);
-            graph.addEdge(v2, v1);
-            graph.addEdge(v2, v1);
-            graph.addEdge(v2, v1);
-            graph.addEdge(v1, v1);
-            graph.addEdge(v1, v1);
-            graph.addEdge(v1, v1);
-        } catch (IllegalArgumentException e) {
-            Assert.fail();
-        }
+        graph.addEdge(v1, v2);
+        graph.addEdge(v1, v2);
+        graph.addEdge(v1, v2);
+        graph.addEdge(v2, v1);
+        graph.addEdge(v2, v1);
+        graph.addEdge(v2, v1);
+        graph.addEdge(v1, v1);
+        graph.addEdge(v1, v1);
+        graph.addEdge(v1, v1);
     }
 }

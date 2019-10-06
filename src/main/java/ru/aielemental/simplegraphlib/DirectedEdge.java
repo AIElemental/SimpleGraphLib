@@ -1,4 +1,4 @@
-package ru.aielemental.tests.simplegraphlib;
+package ru.aielemental.simplegraphlib;
 
 import java.util.Objects;
 import java.util.Optional;

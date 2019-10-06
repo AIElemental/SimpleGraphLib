@@ -1,4 +1,4 @@
-package ru.aielemental.tests.simplegraphlib;
+package ru.aielemental.simplegraphlib;
 
 import org.junit.Assert;
 import org.junit.Test;
