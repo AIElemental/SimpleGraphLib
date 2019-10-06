@@ -1,3 +1,7 @@
+To build either use IntelliJ IDEA to import project as maven project with java 11
+or use buildAndLaunchMain.sh script to build main. Requires java 11.
+
+
 # SimpleGraphLib
 Simple Graph lib:
 
