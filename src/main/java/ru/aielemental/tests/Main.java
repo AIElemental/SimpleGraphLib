@@ -2,7 +2,7 @@ package ru.aielemental.tests;
 
 import java.util.Objects;
 
-import simplegraphlib.Graphs;
+import ru.aielemental.tests.simplegraphlib.Graphs;
 
 public class Main {
 

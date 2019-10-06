@@ -1,4 +1,4 @@
-package simplegraphlib;
+package ru.aielemental.tests.simplegraphlib;
 
 /**
  * @author Artem Bulanov

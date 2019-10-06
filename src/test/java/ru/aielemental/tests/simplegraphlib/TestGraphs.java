@@ -2,7 +2,6 @@ package ru.aielemental.tests.simplegraphlib;
 
 import org.junit.Assert;
 import org.junit.Test;
-import simplegraphlib.Graphs;
 
 /**
  * @author Artem Bulanov <aite@yandex-team.ru>

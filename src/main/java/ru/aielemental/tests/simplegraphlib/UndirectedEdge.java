@@ -1,4 +1,4 @@
-package simplegraphlib;
+package ru.aielemental.tests.simplegraphlib;
 
 import java.util.Collections;
 import java.util.HashSet;
